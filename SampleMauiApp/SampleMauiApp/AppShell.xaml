@@ -6,9 +6,11 @@
     xmlns:local="clr-namespace:SampleMauiApp"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:FirstPage}"
-        Route="FirstPage" />
+    <!--
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:FirstPage}" Route="FirstPage" />
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:FirstPageV1}" Route="FirstPageV1" />
+    -->
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:FirstPage}" Route="FirstPage" />
 
 </Shell>

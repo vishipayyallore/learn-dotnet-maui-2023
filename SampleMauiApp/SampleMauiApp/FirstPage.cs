@@ -7,6 +7,8 @@ public class FirstPage : ContentPage
 
     public FirstPage()
     {
+        Title = "First Page - C#";
+
         var scrollView = new ScrollView();
 
         var stackLayout = new StackLayout();
