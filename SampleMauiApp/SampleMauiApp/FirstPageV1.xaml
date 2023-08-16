@@ -2,11 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SampleMauiApp.FirstPageV1"
+             xmlns:resources="clr-namespace:SampleMauiApp.Resources"
              Title="FirstPageV1">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout>
+        <Label Text="Count: 0" VerticalOptions="Center" HorizontalOptions="Center" x:Name="lblCounter" 
+               FontSize="22" TextColor="{x:Static Member=resources:SharedResources.FontColour}"
+               FontAttributes="Bold" IsEnabled="True"/>
+
+        <Button  Text="Click To Count" Clicked="Button_Clicked"
+            VerticalOptions="Center"  HorizontalOptions="Center" />
+    </StackLayout>
 </ContentPage>
