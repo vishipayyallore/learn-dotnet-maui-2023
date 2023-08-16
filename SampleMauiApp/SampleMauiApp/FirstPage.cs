@@ -16,6 +16,7 @@ public class FirstPage : ContentPage
         {
             Text = "Count: 0",
             FontSize = 22,
+            TextColor = Color.Parse("Maroon"),
             FontAttributes = FontAttributes.Bold,
             HorizontalOptions = LayoutOptions.Center,
         };
