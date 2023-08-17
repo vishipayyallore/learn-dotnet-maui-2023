@@ -6,7 +6,7 @@ public partial class LayoutExample : ContentPage
     {
         InitializeComponent();
 
-        //VStackLayout.Padding = DeviceInfo.Platform == DevicePlatform.iOS
-        //    ? new Thickness(30, 10, 30, 10) : new Thickness(25);
+        VStackLayout.Padding = DeviceInfo.Platform == DevicePlatform.iOS
+            ? new Thickness(30, 10, 30, 10) : new Thickness(25);
     }
 }
