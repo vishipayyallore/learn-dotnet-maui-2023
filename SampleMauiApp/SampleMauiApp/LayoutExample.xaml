@@ -4,11 +4,12 @@
              x:Class="SampleMauiApp.LayoutExample"
              Title="Layout Example">
     <VerticalStackLayout x:Name="VStackLayout" Padding="{OnPlatform iOS='30,10,30,10', Default='30'}" BackgroundColor="{OnPlatform iOS=Green, Android=AliceBlue}">
-        <Label Text="Welcome to .NET MAUI Layout Example!" VerticalOptions="Center" HorizontalOptions="Center" />
+        <Label Text="Welcome to .NET MAUI Layout Example!" TextColor="BlueViolet" FontSize="18"
+               VerticalOptions="Center" HorizontalOptions="Center" />
 
         <Grid ColumnDefinitions="Auto, 30, Auto">
-            <Button Grid.Column="0" Text="Test Button" WidthRequest="100" />
-            <Button Grid.Column="2" Text="Test Button" WidthRequest="100" />
+            <Button Grid.Column="0" Text="Button One" WidthRequest="100" />
+            <Button Grid.Column="2" Text="Button Two" WidthRequest="100" />
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
