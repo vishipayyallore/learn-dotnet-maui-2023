@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fontSize="clr-namespace:SampleMauiApp"
              x:Class="SampleMauiApp.MainPage">
 
     <ScrollView>
@@ -18,7 +19,7 @@
             <Label
                 Text="Hello, World!"
                 SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
+                FontSize="{fontSize:GlobalFontSize}"
                 HorizontalOptions="Center" />
 
             <Label
