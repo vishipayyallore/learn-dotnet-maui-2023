@@ -9,7 +9,6 @@
                FontSize="22" TextColor="{x:Static Member=resources:SharedResources.FontColour}"
                FontAttributes="Bold" IsEnabled="True"/>
 
-        <Button  Text="Click To Count" Clicked="Button_Clicked"
-            VerticalOptions="Center"  HorizontalOptions="Center" />
+        <Button Text="Click To Count" Clicked="Button_Clicked" VerticalOptions="Center" HorizontalOptions="Center" />
     </StackLayout>
 </ContentPage>
