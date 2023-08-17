@@ -6,18 +6,25 @@
     xmlns:local="clr-namespace:SampleMauiApp"
     Shell.FlyoutBehavior="Disabled">
 
-    <!--
-    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
-    -->
+    <!--Shell.FlyoutBehavior="Flyout"-->
+    <!--<ShellContent Title="Home" Icon="dotnet_bot.png" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    <ShellContent Title="Layout Example" ContentTemplate="{DataTemplate local:LayoutExample}" Route="LayoutExample" />
+    <ShellContent Title="First Page - XAML" ContentTemplate="{DataTemplate local:FirstPageV1}" Route="FirstPageV1" />
+    <ShellContent Title="First Page - C#" ContentTemplate="{DataTemplate local:FirstPage}" Route="FirstPage" />-->
 
-    <!--
-    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:FirstPage}" Route="FirstPage" />
-    -->
-
-    <!--
-    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:FirstPageV1}" Route="FirstPageV1" />
-    -->
-
-    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:LayoutExample}" Route="LayoutExample" />
+    <TabBar>
+        <Tab Title="Main Page" Icon="dotnet_bot.png">
+            <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+        </Tab>
+        <Tab Title="Layout" Icon="dotnet_bot.png">
+            <ShellContent Title="Layout Example" ContentTemplate="{DataTemplate local:LayoutExample}" Route="LayoutExample" />
+        </Tab>
+        <Tab Title="XAML Page" Icon="dotnet_bot.png">
+            <ShellContent Title="First Page - XAML" ContentTemplate="{DataTemplate local:FirstPageV1}" Route="FirstPageV1" />
+        </Tab>
+        <Tab Title="C# Page" Icon="dotnet_bot.png">
+            <ShellContent Title="First Page - C#" ContentTemplate="{DataTemplate local:FirstPage}" Route="FirstPage" />
+        </Tab>
+    </TabBar>
 
 </Shell>
