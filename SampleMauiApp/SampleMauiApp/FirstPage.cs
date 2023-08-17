@@ -14,7 +14,7 @@ public class FirstPage : ContentPage
         var stackLayout = new StackLayout();
         scrollView.Content = stackLayout;
 
-        Color.TryParse("#C36304", out Color _color);
+        Color.TryParse("#3498DB", out Color _color);
         lblCounter = new Label
         {
             Text = "Count: 0",
