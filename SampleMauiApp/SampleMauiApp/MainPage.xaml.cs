@@ -4,6 +4,8 @@
     {
         int count = 0;
 
+        public const double FontSize = 22;
+
         public MainPage()
         {
             InitializeComponent();

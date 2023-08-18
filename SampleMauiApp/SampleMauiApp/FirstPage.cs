@@ -14,11 +14,12 @@ public class FirstPage : ContentPage
         var stackLayout = new StackLayout();
         scrollView.Content = stackLayout;
 
+        Color.TryParse("#800080", out Color _color);
         lblCounter = new Label
         {
             Text = "Count: 0",
             FontSize = 22,
-            TextColor = Color.Parse("Maroon"),
+            TextColor = _color,
             FontAttributes = FontAttributes.Bold,
             HorizontalOptions = LayoutOptions.Center,
         };
@@ -27,6 +28,7 @@ public class FirstPage : ContentPage
         var btnCounter = new Button
         {
             Text = "Click To Count",
+            BackgroundColor = _color,
             HorizontalOptions = LayoutOptions.Center,
         };
         stackLayout.Children.Add(btnCounter);
