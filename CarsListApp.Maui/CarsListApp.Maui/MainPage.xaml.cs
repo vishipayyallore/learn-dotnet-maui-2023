@@ -1,12 +1,27 @@
-﻿namespace CarsListApp.Maui
+﻿using CarsListApp.Maui.ViewModels;
+
+namespace CarsListApp.Maui
 {
     public partial class MainPage : ContentPage
     {
+        private readonly CarListViewModel _carListViewModel;
+
         int count = 0;
 
-        public MainPage()
+        public MainPage(CarListViewModel carListViewModel)
         {
             InitializeComponent();
+
+            BindingContext = carListViewModel;
+
+            _carListViewModel = carListViewModel;
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // await _carListViewModel.GetCarList();
         }
 
         private void OnCounterClicked(object sender, EventArgs e)
