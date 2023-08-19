@@ -17,24 +17,6 @@ public partial class CarListViewModel : BaseViewModel
         _carApiService = carApiService ?? throw new ArgumentNullException(nameof(carApiService));
     }
 
-    //const string editButtonText = "Update Car";
-    //const string createButtonText = "Add Car";
-    //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
-    //string message = string.Empty;
-
-    //[ObservableProperty]
-    //bool isRefreshing;
-    //[ObservableProperty]
-    //string make;
-    //[ObservableProperty]
-    //string model;
-    //[ObservableProperty]
-    //string vin;
-    //[ObservableProperty]
-    //string addEditButtonText;
-    //[ObservableProperty]
-    //int carId;
-
     //[RelayCommand]
     //public async Task GetCarList()
     //{
@@ -65,6 +47,27 @@ public partial class CarListViewModel : BaseViewModel
     //        IsRefreshing = false;
     //    }
     //}
+
+
+    //const string editButtonText = "Update Car";
+    //const string createButtonText = "Add Car";
+    //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+    //string message = string.Empty;
+
+    //[ObservableProperty]
+    //bool isRefreshing;
+    //[ObservableProperty]
+    //string make;
+    //[ObservableProperty]
+    //string model;
+    //[ObservableProperty]
+    //string vin;
+    //[ObservableProperty]
+    //string addEditButtonText;
+    //[ObservableProperty]
+    //int carId;
+
+
 
     //[RelayCommand]
     //async Task GetCarDetails(int id)
