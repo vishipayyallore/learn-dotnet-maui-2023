@@ -8,7 +8,7 @@ namespace CarsListApp.Maui.ViewModels;
 
 public partial class CarListViewModel : BaseViewModel
 {
-    private readonly CarService _carApiService;
+    private readonly CarService _carService;
 
     public ObservableCollection<Car> Cars { get; private set; } = new();
 
@@ -16,7 +16,7 @@ public partial class CarListViewModel : BaseViewModel
     {
         Title = "Car List";
 
-        _carApiService = carApiService ?? throw new ArgumentNullException(nameof(carApiService));
+        _carService = carApiService ?? throw new ArgumentNullException(nameof(carApiService));
     }
 
     [RelayCommand]
@@ -31,14 +31,15 @@ public partial class CarListViewModel : BaseViewModel
 
             var cars = new List<Car>();
 
-            cars = _carApiService.GetCars();
+            cars = _carService.GetCars();
+
             foreach (var car in cars) Cars.Add(car);
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Unable to get cars: {ex.Message}");
 
-            await ShowAlert("Failed to retrive list of cars.");
+            await ShowAlert("Failed to retrieve list of cars.");
         }
         finally
         {
