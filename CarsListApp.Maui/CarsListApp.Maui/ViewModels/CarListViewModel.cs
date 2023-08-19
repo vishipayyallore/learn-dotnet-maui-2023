@@ -1,6 +1,8 @@
 ﻿using CarsListApp.Maui.Models;
 using CarsListApp.Maui.Services;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace CarsListApp.Maui.ViewModels;
 
@@ -17,36 +19,32 @@ public partial class CarListViewModel : BaseViewModel
         _carApiService = carApiService ?? throw new ArgumentNullException(nameof(carApiService));
     }
 
-    //[RelayCommand]
-    //public async Task GetCarList()
-    //{
-    //    if (IsLoading) return;
-    //    try
-    //    {
-    //        IsLoading = true;
-    //        if (Cars.Any()) Cars.Clear();
-    //        var cars = new List<Car>();
-    //        if (accessType == NetworkAccess.Internet)
-    //        {
-    //            cars = await carApiService.GetCars();
-    //        }
-    //        else
-    //        {
-    //            cars = App.CarDatabaseService.GetCars();
-    //        }
-    //        foreach (var car in cars) Cars.Add(car);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Debug.WriteLine($"Unable to get cars: {ex.Message}");
-    //        await ShowAlert("Failed to retrive list of cars.");
-    //    }
-    //    finally
-    //    {
-    //        IsLoading = false;
-    //        IsRefreshing = false;
-    //    }
-    //}
+    [RelayCommand]
+    public async Task GetCarList()
+    {
+        if (IsLoading) return;
+        try
+        {
+            IsLoading = true;
+
+            if (Cars.Any()) Cars.Clear();
+
+            var cars = new List<Car>();
+
+            cars = _carApiService.GetCars();
+            foreach (var car in cars) Cars.Add(car);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Unable to get cars: {ex.Message}");
+
+            await ShowAlert("Failed to retrive list of cars.");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
 
 
     //const string editButtonText = "Update Car";
