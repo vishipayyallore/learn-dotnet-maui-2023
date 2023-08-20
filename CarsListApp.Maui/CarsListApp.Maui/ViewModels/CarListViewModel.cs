@@ -1,5 +1,6 @@
 ﻿using CarsListApp.Maui.Models;
 using CarsListApp.Maui.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -19,10 +20,14 @@ public partial class CarListViewModel : BaseViewModel
         _carService = carApiService ?? throw new ArgumentNullException(nameof(carApiService));
     }
 
+    [ObservableProperty]
+    bool isRefreshing;
+
     [RelayCommand]
     public async Task GetCarList()
     {
         if (IsLoading) return;
+
         try
         {
             IsLoading = true;
@@ -44,17 +49,16 @@ public partial class CarListViewModel : BaseViewModel
         finally
         {
             IsLoading = false;
+
+            IsRefreshing = false;
         }
     }
-
 
     //const string editButtonText = "Update Car";
     //const string createButtonText = "Add Car";
     //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
     //string message = string.Empty;
 
-    //[ObservableProperty]
-    //bool isRefreshing;
     //[ObservableProperty]
     //string make;
     //[ObservableProperty]
@@ -65,8 +69,6 @@ public partial class CarListViewModel : BaseViewModel
     //string addEditButtonText;
     //[ObservableProperty]
     //int carId;
-
-
 
     //[RelayCommand]
     //async Task GetCarDetails(int id)
