@@ -19,7 +19,7 @@ namespace CarsListApp.Maui
         {
             base.OnAppearing();
 
-            await _carListViewModel.GetCarList();
+            // await _carListViewModel.GetCarList();
         }
 
     }
