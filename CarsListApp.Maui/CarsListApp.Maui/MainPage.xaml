@@ -19,7 +19,6 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-
         <Button Text="Fetch Cars" Command="{Binding GetCarListCommand}" IsEnabled="{Binding IsNotLoading}" Grid.Row="1" Grid.Column="0"></Button>
     </Grid>
 
