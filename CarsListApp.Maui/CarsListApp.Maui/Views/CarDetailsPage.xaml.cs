@@ -4,10 +4,16 @@ namespace CarsListApp.Maui.Views;
 
 public partial class CarDetailsPage : ContentPage
 {
-    private readonly CarDetailsViewModel _carDetailsViewModel;
+    // private readonly CarDetailsViewModel _carDetailsViewModel;
 
-    public CarDetailsPage()
+    public CarDetailsPage(CarDetailsViewModel carDetailsViewModel)
     {
         InitializeComponent();
+
+        BindingContext = carDetailsViewModel;
+
+        // _carDetailsViewModel = carDetailsViewModel;
     }
+
+
 }
