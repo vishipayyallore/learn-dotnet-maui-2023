@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:CarsListApp.Maui.ViewModels" 
              x:DataType="viewmodel:CarListViewModel" Title="{Binding Title}">
 
-    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*, Auto">
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*, Auto" BackgroundColor="CornflowerBlue">
 
         <RefreshView Grid.ColumnSpan="2" Command="{Binding GetCarListCommand}" IsRefreshing="{Binding IsRefreshing}">
 
