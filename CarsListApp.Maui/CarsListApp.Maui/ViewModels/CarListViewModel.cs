@@ -1,5 +1,6 @@
 ﻿using CarsListApp.Maui.Models;
 using CarsListApp.Maui.Services;
+using CarsListApp.Maui.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
