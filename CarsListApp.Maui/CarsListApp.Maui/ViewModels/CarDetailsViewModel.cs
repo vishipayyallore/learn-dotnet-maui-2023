@@ -5,14 +5,14 @@ using System.Web;
 
 namespace CarsListApp.Maui.ViewModels;
 
-[QueryProperty(nameof(Id), nameof(Id))]
+[QueryProperty(nameof(Car), "Car")]
 public partial class CarDetailsViewModel : BaseViewModel, IQueryAttributable
 {
-    private readonly CarService carApiService;
+    private readonly CarService _carApiService;
 
     public CarDetailsViewModel(CarService carApiService)
     {
-        this.carApiService = carApiService;
+        _carApiService = carApiService ?? throw new ArgumentNullException(nameof(carApiService));
     }
 
     NetworkAccess accessType = Connectivity.Current.NetworkAccess;
