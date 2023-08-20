@@ -12,6 +12,8 @@ public partial class CarDetailsViewModel : BaseViewModel, IQueryAttributable
 
     public CarDetailsViewModel(CarService carApiService)
     {
+        Title = $"Car Details - {car.Make} {car.Model}";
+
         _carApiService = carApiService ?? throw new ArgumentNullException(nameof(carApiService));
     }
 
