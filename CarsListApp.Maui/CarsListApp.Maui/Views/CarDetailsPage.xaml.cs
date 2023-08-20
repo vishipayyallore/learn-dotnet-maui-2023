@@ -15,5 +15,9 @@ public partial class CarDetailsPage : ContentPage
         // _carDetailsViewModel = carDetailsViewModel;
     }
 
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+    }
 
 }
