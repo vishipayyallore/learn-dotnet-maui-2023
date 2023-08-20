@@ -54,6 +54,24 @@ public partial class CarListViewModel : BaseViewModel
         }
     }
 
+    [RelayCommand]
+    async Task GetCarDetails(Car car)
+    {
+        if (car is null)
+        {
+            return;
+        }
+
+        await Shell.Current.GoToAsync(nameof(CarDetailsPage), true, new Dictionary<string, object>
+        {
+            {nameof(Car), car}
+        });
+
+        //if (id == 0) return;
+
+        //await Shell.Current.GoToAsync($"{nameof(CarDetailsPage)}?Id={id}", true);
+    }
+
     //const string editButtonText = "Update Car";
     //const string createButtonText = "Add Car";
     //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
@@ -70,13 +88,7 @@ public partial class CarListViewModel : BaseViewModel
     //[ObservableProperty]
     //int carId;
 
-    //[RelayCommand]
-    //async Task GetCarDetails(int id)
-    //{
-    //    if (id == 0) return;
 
-    //    await Shell.Current.GoToAsync($"{nameof(CarDetailsPage)}?Id={id}", true);
-    //}
 
     //[RelayCommand]
     //async Task SaveCar()

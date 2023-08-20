@@ -15,7 +15,7 @@
                         <Grid Padding="10" >
                             <Frame HeightRequest="90" BackgroundColor="AliceBlue">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="" CommandParameter="" />
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=GetCarDetailsCommand }" CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
 
                                 <HorizontalStackLayout Padding="10" Spacing="5">
