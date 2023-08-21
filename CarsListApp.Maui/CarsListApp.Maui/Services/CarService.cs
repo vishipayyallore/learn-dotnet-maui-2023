@@ -7,6 +7,9 @@ public class CarService
 {
     private SQLiteConnection conn;
     private readonly string _dbPath;
+    private int result = 0;
+
+    public string StatusMessage;
 
     public CarService(string dbPath)
     {
@@ -24,15 +27,15 @@ public class CarService
 
     public List<Car> GetCars()
     {
-        Init();
-
         try
         {
+            Init();
 
+            return conn.Table<Car>().ToList();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-
+            StatusMessage = "Failed to retrieve data.";
         }
 
         return new();
