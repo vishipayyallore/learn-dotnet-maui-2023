@@ -31,7 +31,7 @@
         </RefreshView>
 
         <Button Text="Fetch Cars" Command="{Binding GetCarListCommand}" IsEnabled="{Binding IsNotLoading}" 
-                Margin="9" Grid.Row="1" Grid.Column="0" FontSize="22"></Button>
+                Margin="9" Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Coral" FontSize="22"></Button>
     </Grid>
 
 </ContentPage>
