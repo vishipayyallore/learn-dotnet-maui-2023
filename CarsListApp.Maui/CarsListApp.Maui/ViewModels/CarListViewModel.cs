@@ -1,5 +1,7 @@
 ﻿using CarsListApp.Maui.Models;
 using CarsListApp.Maui.Services;
+using CarsListApp.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -19,10 +21,14 @@ public partial class CarListViewModel : BaseViewModel
         _carService = carApiService ?? throw new ArgumentNullException(nameof(carApiService));
     }
 
+    [ObservableProperty]
+    bool isRefreshing;
+
     [RelayCommand]
     public async Task GetCarList()
     {
         if (IsLoading) return;
+
         try
         {
             IsLoading = true;
@@ -44,17 +50,34 @@ public partial class CarListViewModel : BaseViewModel
         finally
         {
             IsLoading = false;
+
+            IsRefreshing = false;
         }
     }
 
+    [RelayCommand]
+    async Task GetCarDetails(Car car)
+    {
+        if (car is null)
+        {
+            return;
+        }
+
+        await Shell.Current.GoToAsync(nameof(CarDetailsPage), true, new Dictionary<string, object>
+        {
+            {nameof(Car), car}
+        });
+
+        //if (id == 0) return;
+
+        //await Shell.Current.GoToAsync($"{nameof(CarDetailsPage)}?Id={id}", true);
+    }
 
     //const string editButtonText = "Update Car";
     //const string createButtonText = "Add Car";
     //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
     //string message = string.Empty;
 
-    //[ObservableProperty]
-    //bool isRefreshing;
     //[ObservableProperty]
     //string make;
     //[ObservableProperty]
@@ -67,14 +90,6 @@ public partial class CarListViewModel : BaseViewModel
     //int carId;
 
 
-
-    //[RelayCommand]
-    //async Task GetCarDetails(int id)
-    //{
-    //    if (id == 0) return;
-
-    //    await Shell.Current.GoToAsync($"{nameof(CarDetailsPage)}?Id={id}", true);
-    //}
 
     //[RelayCommand]
     //async Task SaveCar()

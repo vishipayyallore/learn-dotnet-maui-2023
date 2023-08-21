@@ -1,5 +1,6 @@
 ﻿using CarsListApp.Maui.Services;
 using CarsListApp.Maui.ViewModels;
+using CarsListApp.Maui.Views;
 using Microsoft.Extensions.Logging;
 
 namespace CarsListApp.Maui
@@ -24,18 +25,18 @@ namespace CarsListApp.Maui
             builder.Services.AddTransient<CarService>();
 
             builder.Services.AddSingleton<CarListViewModel>();
+            builder.Services.AddTransient<CarDetailsViewModel>();
 
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<CarDetailsPage>();
 
             //builder.Services.AddSingleton<LoadingPageViewModel>();
             //builder.Services.AddSingleton<LoginViewModel>();
             //builder.Services.AddSingleton<LogoutViewModel>();
-            //builder.Services.AddTransient<CarDetailsViewModel>();
 
             //builder.Services.AddSingleton<LoadingPage>();
             //builder.Services.AddSingleton<LoginPage>();
             //builder.Services.AddSingleton<LogoutPage>();
-            //builder.Services.AddTransient<CarDetailsPage>();
 
             return builder.Build();
         }
