@@ -1,18 +1,41 @@
 ﻿using CarsListApp.Maui.Models;
+using SQLite;
 
 namespace CarsListApp.Maui.Services;
 
 public class CarService
 {
+    private SQLiteConnection conn;
+    private readonly string _dbPath;
 
-    public List<Car> GetCars() => new()
+    public CarService(string dbPath)
+    {
+        _dbPath = dbPath;
+    }
+
+    private void Init()
+    {
+        if (conn is not null)
+            return;
+
+        conn = new SQLiteConnection(_dbPath);
+        conn.CreateTable<Car>();
+    }
+
+    public List<Car> GetCars()
+    {
+        Init();
+
+        try
         {
-            new Car() { Id = 1, Make = "Honda", Model = "Fit", Vin="123" },
-            new Car() { Id = 2, Make = "Toyota", Model = "Fit", Vin="234" },
-            new Car() { Id = 3, Make = "Audi", Model = "Fit", Vin="345" },
-            new Car() { Id = 4, Make = "BMW", Model = "Fit", Vin="456" },
-            new Car() { Id = 5, Make = "Nissan", Model = "Fit", Vin="567" },
-            new Car() { Id = 6, Make = "Ferrari", Model = "Fit", Vin="678" },
-        };
+
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+        return new();
+    }
 
 }
