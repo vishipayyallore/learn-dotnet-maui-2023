@@ -7,15 +7,17 @@
              Title="{Binding Car.Make}">
 
     <StackLayout BackgroundColor="CornflowerBlue">
-        <Label Text="{Binding Car.Make}"
+        <StackLayout BackgroundColor="AliceBlue">
+            <Label Text="{Binding Car.Make}"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" FontSize="Medium"/>
-        <Label Text="{Binding Car.Model}"
+            <Label Text="{Binding Car.Model}"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" FontSize="Medium"/>
-        <Label Text="{Binding Car.Vin}"
+            <Label Text="{Binding Car.Vin}"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" FontSize="Medium"/>
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
