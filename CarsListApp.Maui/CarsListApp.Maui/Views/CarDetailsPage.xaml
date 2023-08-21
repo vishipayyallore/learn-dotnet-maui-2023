@@ -6,7 +6,7 @@
              x:DataType="vm:CarDetailsViewModel"
              Title="{Binding Car.Make}">
 
-    <StackLayout>
+    <StackLayout BackgroundColor="CornflowerBlue">
         <Label Text="{Binding Car.Make}"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" FontSize="Medium"/>
