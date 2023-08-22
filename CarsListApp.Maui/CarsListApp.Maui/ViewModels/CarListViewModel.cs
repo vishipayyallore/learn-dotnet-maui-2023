@@ -19,6 +19,21 @@ public partial class CarListViewModel : BaseViewModel
     [ObservableProperty]
     bool isRefreshing;
 
+    [ObservableProperty]
+    string make;
+
+    [ObservableProperty]
+    string model;
+
+    [ObservableProperty]
+    string vin;
+
+    [ObservableProperty]
+    string addEditButtonText;
+
+    [ObservableProperty]
+    int carId;
+
     [RelayCommand]
     public async Task GetCarList()
     {
@@ -73,16 +88,7 @@ public partial class CarListViewModel : BaseViewModel
     //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
     //string message = string.Empty;
 
-    //[ObservableProperty]
-    //string make;
-    //[ObservableProperty]
-    //string model;
-    //[ObservableProperty]
-    //string vin;
-    //[ObservableProperty]
-    //string addEditButtonText;
-    //[ObservableProperty]
-    //int carId;
+
 
 
 
