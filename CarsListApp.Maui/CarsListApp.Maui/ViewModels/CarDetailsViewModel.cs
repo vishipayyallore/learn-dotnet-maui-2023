@@ -1,12 +1,23 @@
 ﻿using CarsListApp.Maui.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Web;
 
 namespace CarsListApp.Maui.ViewModels;
 
-[QueryProperty(nameof(Car), "Car")]
+[QueryProperty(nameof(Id), nameof(Id))]
 public partial class CarDetailsViewModel : BaseViewModel
 {
 
     [ObservableProperty]
     Car car;
+
+    [ObservableProperty]
+    int id;
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        Id = Convert.ToInt32(HttpUtility.UrlDecode(query["Id"].ToString()));
+
+        Car = App.CarServiceInstance.GetCar(Id);
+    }
 }

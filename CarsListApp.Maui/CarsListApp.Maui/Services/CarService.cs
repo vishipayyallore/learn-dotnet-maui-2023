@@ -7,7 +7,7 @@ public class CarService
 {
     private SQLiteConnection conn;
     private readonly string _dbPath;
-    private readonly int result = 0;
+    private int result = 0;
 
     public string StatusMessage;
 
@@ -39,6 +39,42 @@ public class CarService
         }
 
         return new();
+    }
+
+    public void AddCar(Car car)
+    {
+        try
+        {
+            Init();
+
+            if (car is null)
+                throw new Exception("Invalid Car Record");
+
+            result = conn.Insert(car);
+            StatusMessage = result == 0 ? "Insert Failed" : "Insert Successful";
+        }
+        catch (Exception)
+        {
+            StatusMessage = "Failed to Insert data.";
+        }
+    }
+
+    public int DeleteCar(Car car)
+    {
+        int result = 0;
+
+        try
+        {
+            Init();
+
+            result = conn.Table<Car>().Delete(q => q.Id == car.Id);
+        }
+        catch (Exception)
+        {
+            StatusMessage = "Failed to Insert data.";
+        }
+
+        return result;
     }
 
 }
