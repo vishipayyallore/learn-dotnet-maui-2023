@@ -1,7 +1,9 @@
-﻿namespace CarsListApp.Maui.Models;
+﻿using SQLite;
+
+namespace CarsListApp.Maui.Models;
 
 public abstract class BaseEntity
 {
-    // [PrimaryKey, AutoIncrement]
+    [PrimaryKey, AutoIncrement]
     public int Id { get; set; }
 }

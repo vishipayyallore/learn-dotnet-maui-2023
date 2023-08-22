@@ -22,7 +22,8 @@ namespace CarsListApp.Maui
             builder.Logging.AddDebug();
 #endif
 
-            builder.Services.AddTransient<CarService>();
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "cars.db3");
+            builder.Services.AddTransient(s => ActivatorUtilities.CreateInstance<CarService>(s, dbPath));
 
             builder.Services.AddSingleton<CarListViewModel>();
             builder.Services.AddTransient<CarDetailsViewModel>();
@@ -38,6 +39,7 @@ namespace CarsListApp.Maui
             //builder.Services.AddSingleton<LoginPage>();
             //builder.Services.AddSingleton<LogoutPage>();
 
+            // builder.Services.AddTransient<CarService>();
             return builder.Build();
         }
     }

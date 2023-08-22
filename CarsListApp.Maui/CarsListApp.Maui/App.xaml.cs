@@ -1,12 +1,18 @@
-﻿namespace CarsListApp.Maui
+﻿using CarsListApp.Maui.Services;
+
+namespace CarsListApp.Maui
 {
     public partial class App : Application
     {
-        public App()
+        public static CarService CarServiceInstance { get; private set; }
+
+        public App(CarService carService)
         {
             InitializeComponent();
 
             MainPage = new AppShell();
+
+            CarServiceInstance = carService;
         }
     }
 }
