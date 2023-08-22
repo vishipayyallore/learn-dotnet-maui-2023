@@ -74,7 +74,7 @@ public class CarService
         }
     }
 
-    public int DeleteCar(Car car)
+    public int DeleteCar(int id)
     {
         int result = 0;
 
@@ -82,11 +82,11 @@ public class CarService
         {
             Init();
 
-            result = conn.Table<Car>().Delete(q => q.Id == car.Id);
+            result = conn.Table<Car>().Delete(q => q.Id == id);
         }
         catch (Exception)
         {
-            StatusMessage = "Failed to Insert data.";
+            StatusMessage = "Failed to Delete data.";
         }
 
         return result;

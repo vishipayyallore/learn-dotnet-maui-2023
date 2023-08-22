@@ -123,18 +123,24 @@ public partial class CarListViewModel : BaseViewModel
         }
 
         var result = App.CarServiceInstance.DeleteCar(id);
-        message = App.CarDatabaseService.StatusMessage;
-        
-        await ShowAlert(message);
-        await GetCarList();
+
+        if (result == 0)
+        {
+            await Shell.Current.DisplayAlert("Failed", App.CarServiceInstance.StatusMessage, "Ok");
+        }
+        else
+        {
+            await Shell.Current.DisplayAlert("Deletion Success", App.CarServiceInstance.StatusMessage, "Ok");
+            await GetCarList();
+        }
     }
 
-    //[RelayCommand]
-    //async Task UpdateCar(int id)
-    //{
-    //    AddEditButtonText = editButtonText;
-    //    return;
-    //}
+    [RelayCommand]
+    async Task UpdateCar(int id)
+    {
+        // AddEditButtonText = editButtonText;
+        return;
+    }
 
     //[RelayCommand]
     //async Task SetEditMode(int id)
