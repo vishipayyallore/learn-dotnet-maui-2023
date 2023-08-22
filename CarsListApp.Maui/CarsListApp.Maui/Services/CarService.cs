@@ -41,6 +41,21 @@ public class CarService
         return new();
     }
 
+    public Car GetCar(int id)
+    {
+        try
+        {
+            Init();
+            return conn.Table<Car>().FirstOrDefault(q => q.Id == id);
+        }
+        catch (Exception)
+        {
+            StatusMessage = "Failed to retrieve data.";
+        }
+
+        return null;
+    }
+
     public void AddCar(Car car)
     {
         try

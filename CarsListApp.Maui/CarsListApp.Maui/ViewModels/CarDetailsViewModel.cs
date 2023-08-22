@@ -5,7 +5,7 @@ using System.Web;
 namespace CarsListApp.Maui.ViewModels;
 
 [QueryProperty(nameof(Id), nameof(Id))]
-public partial class CarDetailsViewModel : BaseViewModel
+public partial class CarDetailsViewModel : BaseViewModel, IQueryAttributable
 {
 
     [ObservableProperty]
