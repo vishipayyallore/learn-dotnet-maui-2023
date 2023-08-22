@@ -29,7 +29,7 @@
                 Command="{Binding AddCarCommand}" Margin="9" BackgroundColor="Green" FontSize="22"/>
 
         <Button Text="Fetch Cars" Command="{Binding GetCarListCommand}" IsEnabled="{Binding IsNotLoading}" 
-                Margin="9" Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="Coral" FontSize="22"></Button>
+                Margin="9" Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="RosyBrown" FontSize="22"></Button>
 
         <RefreshView Grid.Row="4"
                      Command="{Binding GetCarListCommand}" 
@@ -50,9 +50,9 @@
                             </Frame>
                             <HorizontalStackLayout Grid.Column="1">
                                 <Button Text="Update" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=SetEditModeCommand}" 
-                                                          CommandParameter="{Binding Id}" Margin="9"/>
+                                                          CommandParameter="{Binding Id}" Margin="9" BackgroundColor="Coral" FontSize="18"/>
                                 <Button Text="Delete" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=DeleteCarCommand }" 
-                                                          CommandParameter="{Binding Id}" Margin="9"/>
+                                                          CommandParameter="{Binding Id}" Margin="9" BackgroundColor="Red" FontSize="18"/>
                             </HorizontalStackLayout>
                         </Grid>
                     </DataTemplate>
