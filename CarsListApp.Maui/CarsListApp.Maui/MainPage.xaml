@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:CarsListApp.Maui.ViewModels" 
              x:DataType="viewmodel:CarListViewModel" Title="{Binding Title}">
 
-    <Grid ColumnSpacing="1" RowSpacing="1" Padding="5">
+    <Grid ColumnSpacing="1" RowSpacing="1" Padding="5" BackgroundColor="CornflowerBlue">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -20,13 +20,13 @@
         </Grid.ColumnDefinitions>
 
         <VerticalStackLayout Padding="5" Grid.Row="0" Margin="9">
-            <Entry x:Name="Make" Placeholder="Enter Make" Text="{Binding Make}" />
-            <Entry x:Name="Model" Placeholder="Enter Model" Text="{Binding Model}"/>
-            <Entry x:Name="Vin" Placeholder="Enter Vin" Text="{Binding Vin}"/>
+            <Entry x:Name="Make" Placeholder="Enter Make" Text="{Binding Make}" PlaceholderColor="White" TextColor="White"/>
+            <Entry x:Name="Model" Placeholder="Enter Model" Text="{Binding Model}" PlaceholderColor="White" TextColor="White"/>
+            <Entry x:Name="Vin" Placeholder="Enter Vin" Text="{Binding Vin}" PlaceholderColor="White" TextColor="White"/>
         </VerticalStackLayout>
 
-        <Button Text="Add Car" Grid.Row="1" IsEnabled="{Binding IsNotLoading}"
-                Command="{Binding AddCarCommand}" Margin="9" />
+        <Button Text="Add Car" Grid.Row="1" Grid.ColumnSpan="2" IsEnabled="{Binding IsNotLoading}"
+                Command="{Binding AddCarCommand}" Margin="9" BackgroundColor="Green" FontSize="22"/>
 
         <Button Text="Fetch Cars" Command="{Binding GetCarListCommand}" IsEnabled="{Binding IsNotLoading}" 
                 Margin="9" Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="Coral" FontSize="22"></Button>
@@ -38,7 +38,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Car">
                         <Grid Padding="10" ColumnDefinitions="*, auto">
-                            <Frame HeightRequest="70" Grid.Column="0">
+                            <Frame HeightRequest="70" Grid.Column="0" BackgroundColor="AliceBlue">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=GetCarDetailsCommand }" 
                                                           CommandParameter="{Binding Id}" />
