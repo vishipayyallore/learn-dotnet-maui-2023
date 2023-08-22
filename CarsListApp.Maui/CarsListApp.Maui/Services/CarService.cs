@@ -7,7 +7,7 @@ public class CarService
 {
     private SQLiteConnection conn;
     private readonly string _dbPath;
-    private int result = 0;
+    private readonly int result = 0;
 
     public string StatusMessage;
 
