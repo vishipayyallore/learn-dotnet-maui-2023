@@ -29,10 +29,10 @@ public partial class CarListViewModel : BaseViewModel
     [ObservableProperty]
     int carId;
 
-    //const string editButtonText = "Update Car";
-    //const string createButtonText = "Add Car";
-    //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
-    //string message = string.Empty;
+    const string editButtonText = "Update Car";
+    const string createButtonText = "Add Car";
+    NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+    string message = string.Empty;
 
     public CarListViewModel()
     {
@@ -144,37 +144,34 @@ public partial class CarListViewModel : BaseViewModel
         return;
     }
 
-    //[RelayCommand]
-    //async Task SetEditMode(int id)
-    //{
-    //    AddEditButtonText = editButtonText;
-    //    CarId = id;
-    //    Car car;
-    //    if (accessType == NetworkAccess.Internet)
-    //    {
-    //        car = await carApiService.GetCar(CarId);
-    //    }
-    //    else
-    //    {
-    //        car = App.CarDatabaseService.GetCar(CarId);
-    //    }
+    [RelayCommand]
+    async Task SetEditMode(int id)
+    {
+        AddEditButtonText = editButtonText;
+        CarId = id;
+        Car car;
 
-    //    Make = car.Make;
-    //    Model = car.Model;
-    //    Vin = car.Vin;
-    //}
+        car = App.CarServiceInstance.GetCar(CarId);
 
-    //[RelayCommand]
-    //async Task ClearForm()
-    //{
-    //    AddEditButtonText = createButtonText;
-    //    CarId = 0;
-    //    Make = string.Empty;
-    //    Model = string.Empty;
-    //    Vin = string.Empty;
-    //}
+        Make = car.Make;
+        Model = car.Model;
+        Vin = car.Vin;
+    }
 
-    private async Task ShowAlert(string message)
+    [RelayCommand]
+    async Task ClearForm()
+    {
+        AddEditButtonText = createButtonText;
+        CarId = 0;
+
+        Make = string.Empty;
+        Model = string.Empty;
+        Vin = string.Empty;
+
+        await Task.CompletedTask;
+    }
+
+    private static async Task ShowAlert(string message)
     {
         await Shell.Current.DisplayAlert("Info", message, "Ok");
     }
