@@ -11,13 +11,35 @@ public partial class CarListViewModel : BaseViewModel
 {
     public ObservableCollection<Car> Cars { get; private set; } = new();
 
+    [ObservableProperty]
+    bool isRefreshing;
+
+    [ObservableProperty]
+    string make;
+
+    [ObservableProperty]
+    string model;
+
+    [ObservableProperty]
+    string vin;
+
+    [ObservableProperty]
+    string addEditButtonText;
+
+    [ObservableProperty]
+    int carId;
+
+    //const string editButtonText = "Update Car";
+    //const string createButtonText = "Add Car";
+    //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+    //string message = string.Empty;
+
     public CarListViewModel()
     {
         Title = "Car List";
-    }
 
-    [ObservableProperty]
-    bool isRefreshing;
+        GetCarList().Wait();
+    }
 
     [RelayCommand]
     public async Task GetCarList()
@@ -51,119 +73,74 @@ public partial class CarListViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task GetCarDetails(Car car)
+    async Task GetCarDetails(int id)
     {
-        if (car is null)
+        //if (car is null)
+        //{
+        //    return;
+        //}
+
+        //await Shell.Current.GoToAsync(nameof(CarDetailsPage), true, new Dictionary<string, object>
+        //{
+        //    {nameof(Car), car}
+        //});
+
+        if (id == 0) return;
+
+        await Shell.Current.GoToAsync($"{nameof(CarDetailsPage)}?Id={id}", true);
+    }
+
+    [RelayCommand]
+    async Task AddCar()
+    {
+        if (string.IsNullOrEmpty(Make) || string.IsNullOrEmpty(Model) || string.IsNullOrEmpty(Vin))
         {
+            await ShowAlert("Please insert valid data");
             return;
         }
 
-        await Shell.Current.GoToAsync(nameof(CarDetailsPage), true, new Dictionary<string, object>
+        var car = new Car
         {
-            {nameof(Car), car}
-        });
+            Make = Make,
+            Model = Model,
+            Vin = Vin
+        };
 
-        //if (id == 0) return;
+        App.CarServiceInstance.AddCar(car);
 
-        //await Shell.Current.GoToAsync($"{nameof(CarDetailsPage)}?Id={id}", true);
+        await Shell.Current.DisplayAlert("Info", App.CarServiceInstance.StatusMessage, "Ok");
+
+        await GetCarList();
     }
 
-    //const string editButtonText = "Update Car";
-    //const string createButtonText = "Add Car";
-    //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
-    //string message = string.Empty;
+    [RelayCommand]
+    async Task DeleteCar(int id)
+    {
+        if (id == 0)
+        {
+            await ShowAlert("Please try again");
+            return;
+        }
 
-    //[ObservableProperty]
-    //string make;
-    //[ObservableProperty]
-    //string model;
-    //[ObservableProperty]
-    //string vin;
-    //[ObservableProperty]
-    //string addEditButtonText;
-    //[ObservableProperty]
-    //int carId;
+        var result = App.CarServiceInstance.DeleteCar(id);
 
+        if (result == 0)
+        {
+            await Shell.Current.DisplayAlert("Failed", App.CarServiceInstance.StatusMessage, "Ok");
+        }
+        else
+        {
+            await Shell.Current.DisplayAlert("Deletion Success", App.CarServiceInstance.StatusMessage, "Ok");
+            await GetCarList();
+        }
+    }
 
-
-    //[RelayCommand]
-    //async Task SaveCar()
-    //{
-    //    if (string.IsNullOrEmpty(Make) || string.IsNullOrEmpty(Model) || string.IsNullOrEmpty(Vin))
-    //    {
-    //        await ShowAlert("Please insert valid data");
-    //        return;
-    //    }
-
-    //    var car = new Car
-    //    {
-    //        Id = CarId,
-    //        Make = Make,
-    //        Model = Model,
-    //        Vin = Vin
-    //    };
-
-    //    if (CarId != 0)
-    //    {
-    //        if (accessType == NetworkAccess.Internet)
-    //        {
-    //            await carApiService.UpdateCar(CarId, car);
-    //            message = carApiService.StatusMessage;
-    //        }
-    //        else
-    //        {
-    //            App.CarDatabaseService.UpdateCar(car);
-    //            message = App.CarDatabaseService.StatusMessage;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (accessType == NetworkAccess.Internet)
-    //        {
-    //            await carApiService.AddCar(car);
-    //            message = carApiService.StatusMessage;
-    //        }
-    //        else
-    //        {
-    //            App.CarDatabaseService.AddCar(car);
-    //            message = App.CarDatabaseService.StatusMessage;
-    //        }
-
-    //    }
-    //    await ShowAlert(message);
-    //    await GetCarList();
-    //    await ClearForm();
-    //}
-
-    //[RelayCommand]
-    //async Task DeleteCar(int id)
-    //{
-    //    if (id == 0)
-    //    {
-    //        await ShowAlert("Please try again");
-    //        return;
-    //    }
-
-    //    if (accessType == NetworkAccess.Internet)
-    //    {
-    //        await carApiService.DeleteCar(id);
-    //        message = carApiService.StatusMessage;
-    //    }
-    //    else
-    //    {
-    //        App.CarDatabaseService.DeleteCar(id);
-    //        message = App.CarDatabaseService.StatusMessage;
-    //    }
-    //    await ShowAlert(message);
-    //    await GetCarList();
-    //}
-
-    //[RelayCommand]
-    //async Task UpdateCar(int id)
-    //{
-    //    AddEditButtonText = editButtonText;
-    //    return;
-    //}
+    [RelayCommand]
+    async Task UpdateCar(int id)
+    {
+        // AddEditButtonText = editButtonText;
+        return;
+    }
 
     //[RelayCommand]
     //async Task SetEditMode(int id)

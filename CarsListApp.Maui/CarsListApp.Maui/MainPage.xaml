@@ -5,33 +5,90 @@
              xmlns:viewmodel="clr-namespace:CarsListApp.Maui.ViewModels" 
              x:DataType="viewmodel:CarListViewModel" Title="{Binding Title}">
 
-    <Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*, Auto" BackgroundColor="CornflowerBlue">
+    <Grid ColumnSpacing="1" RowSpacing="1" Padding="5" BackgroundColor="CornflowerBlue">
 
-        <RefreshView Grid.ColumnSpan="2" Command="{Binding GetCarListCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <CollectionView Grid.ColumnSpan="2" ItemsSource="{Binding Cars}" SelectionMode="None">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout Padding="5" Grid.Row="0" Margin="9">
+            <Entry x:Name="Make" Placeholder="Enter Make" Text="{Binding Make}" PlaceholderColor="White" TextColor="White"/>
+            <Entry x:Name="Model" Placeholder="Enter Model" Text="{Binding Model}" PlaceholderColor="White" TextColor="White"/>
+            <Entry x:Name="Vin" Placeholder="Enter Vin" Text="{Binding Vin}" PlaceholderColor="White" TextColor="White"/>
+        </VerticalStackLayout>
+
+        <Button Text="Add Car" Grid.Row="1" Grid.ColumnSpan="2" IsEnabled="{Binding IsNotLoading}"
+                Command="{Binding AddCarCommand}" Margin="9" BackgroundColor="Green" FontSize="22"/>
+
+        <Button Text="Fetch Cars" Command="{Binding GetCarListCommand}" IsEnabled="{Binding IsNotLoading}" 
+                Margin="9" Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="RosyBrown" FontSize="22"></Button>
+
+        <RefreshView Grid.Row="4"
+                     Command="{Binding GetCarListCommand}" 
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView ItemsSource="{Binding Cars}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Car">
-                        <Grid Padding="10" >
-                            <Frame HeightRequest="90" BackgroundColor="AliceBlue">
+                        <Grid Padding="10" ColumnDefinitions="*, auto">
+                            <Frame HeightRequest="70" Grid.Column="0" BackgroundColor="AliceBlue">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=GetCarDetailsCommand }" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=GetCarDetailsCommand }" 
+                                                          CommandParameter="{Binding Id}" />
                                 </Frame.GestureRecognizers>
-
-                                <HorizontalStackLayout Padding="10" Spacing="5">
-                                    <Label Text="{Binding Make}" FontSize="18"></Label>
-                                    <Label Text="{Binding Model}" FontSize="18"></Label>
+                                <HorizontalStackLayout Padding="5" Spacing="5">
+                                    <Label Text="{Binding Make}"></Label>
+                                    <Label Text="{Binding Model}"></Label>
                                 </HorizontalStackLayout>
                             </Frame>
+                            <HorizontalStackLayout Grid.Column="1">
+                                <Button Text="Update" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=SetEditModeCommand}" 
+                                                          CommandParameter="{Binding Id}" Margin="9" BackgroundColor="Coral" FontSize="18"/>
+                                <Button Text="Delete" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=DeleteCarCommand }" 
+                                                          CommandParameter="{Binding Id}" Margin="9" BackgroundColor="Red" FontSize="18"/>
+                            </HorizontalStackLayout>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
         </RefreshView>
 
-        <Button Text="Fetch Cars" Command="{Binding GetCarListCommand}" IsEnabled="{Binding IsNotLoading}" 
-                Margin="9" Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Coral" FontSize="22"></Button>
     </Grid>
 
 </ContentPage>
+
+<!--<Grid ColumnDefinitions="*,*" ColumnSpacing="5" RowDefinitions="*, Auto" BackgroundColor="CornflowerBlue">
+
+    <RefreshView Grid.ColumnSpan="2" Command="{Binding GetCarListCommand}" IsRefreshing="{Binding IsRefreshing}">
+
+        <CollectionView Grid.ColumnSpan="2" ItemsSource="{Binding Cars}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Car">
+                    <Grid Padding="10" >
+                        <Frame HeightRequest="90" BackgroundColor="AliceBlue">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CarListViewModel}}, Path=GetCarDetailsCommand }" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+
+                            <HorizontalStackLayout Padding="10" Spacing="5">
+                                <Label Text="{Binding Make}" FontSize="18"></Label>
+                                <Label Text="{Binding Model}" FontSize="18"></Label>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </RefreshView>
+
+    <Button Text="Fetch Cars" Command="{Binding GetCarListCommand}" IsEnabled="{Binding IsNotLoading}" 
+            Margin="9" Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Coral" FontSize="22"></Button>
+</Grid>-->
