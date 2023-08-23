@@ -25,11 +25,11 @@
             <Entry x:Name="Vin" Placeholder="Enter Vin" Text="{Binding Vin}" PlaceholderColor="Navy" TextColor="Navy"/>
         </VerticalStackLayout>
 
-        <Button Text="Add Car" Grid.Row="1" Grid.ColumnSpan="2" IsEnabled="{Binding IsNotLoading}"
-                Command="{Binding AddCarCommand}" Margin="9" BackgroundColor="Green" FontSize="22"/>
+        <Button Text="{Binding AddEditButtonText}" Grid.Row="1" Grid.ColumnSpan="2" IsEnabled="{Binding IsNotLoading}"
+                Command="{Binding SaveCarCommand}" Margin="9" BackgroundColor="Green" FontSize="22"/>
 
-        <Button Text="Fetch Cars" Command="{Binding GetCarListCommand}" IsEnabled="{Binding IsNotLoading}" 
-                Margin="9" Grid.Row="2" Grid.ColumnSpan="2" FontSize="22"></Button>
+        <Button Text="Clear Form" Command="{Binding ClearFormCommand}" IsEnabled="{Binding IsNotLoading}" 
+                Grid.Row="2" Margin="9"/>
 
         <RefreshView Grid.Row="4"
                      Command="{Binding GetCarListCommand}" 
