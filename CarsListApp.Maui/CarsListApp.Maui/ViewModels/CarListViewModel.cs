@@ -130,7 +130,7 @@ public partial class CarListViewModel : BaseViewModel
         }
         else
         {
-            await Shell.Current.DisplayAlert("Deletion Success", App.CarServiceInstance.StatusMessage, "Ok");
+            await Shell.Current.DisplayAlert("Info", "Deletion Success", "Ok");
             await GetCarList();
         }
     }
@@ -139,6 +139,8 @@ public partial class CarListViewModel : BaseViewModel
     async Task UpdateCar(int id)
     {
         // AddEditButtonText = editButtonText;
+
+        await Task.CompletedTask;
         return;
     }
 
