@@ -91,7 +91,7 @@ public partial class CarListViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task AddCar()
+    async Task SaveCar()
     {
         if (string.IsNullOrEmpty(Make) || string.IsNullOrEmpty(Model) || string.IsNullOrEmpty(Vin))
         {
@@ -106,9 +106,17 @@ public partial class CarListViewModel : BaseViewModel
             Vin = Vin
         };
 
-        App.CarServiceInstance.AddCar(car);
-
-        await Shell.Current.DisplayAlert("Info", App.CarServiceInstance.StatusMessage, "Ok");
+        if (CarId != 0)
+        {
+            car.Id = CarId;
+            App.CarServiceInstance.UpdateCar(car);
+            await Shell.Current.DisplayAlert("Info", App.CarServiceInstance.StatusMessage, "Ok");
+        }
+        else
+        {
+            App.CarServiceInstance.AddCar(car);
+            await Shell.Current.DisplayAlert("Info", App.CarServiceInstance.StatusMessage, "Ok");
+        }
 
         await GetCarList();
     }
