@@ -38,6 +38,8 @@ public partial class CarListViewModel : BaseViewModel
     {
         Title = "Car List";
 
+        AddEditButtonText = createButtonText;
+
         GetCarList().Wait();
     }
 
@@ -119,6 +121,7 @@ public partial class CarListViewModel : BaseViewModel
         }
 
         await GetCarList();
+        await ClearForm();
     }
 
     [RelayCommand]
