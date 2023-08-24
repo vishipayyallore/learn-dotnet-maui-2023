@@ -29,14 +29,16 @@ public partial class CarListViewModel : BaseViewModel
     [ObservableProperty]
     int carId;
 
-    //const string editButtonText = "Update Car";
-    //const string createButtonText = "Add Car";
-    //NetworkAccess accessType = Connectivity.Current.NetworkAccess;
-    //string message = string.Empty;
+    const string editButtonText = "Update Car";
+    const string createButtonText = "Add Car";
+    NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+    string message = string.Empty;
 
     public CarListViewModel()
     {
         Title = "Car List";
+
+        AddEditButtonText = createButtonText;
 
         GetCarList().Wait();
     }
@@ -91,7 +93,7 @@ public partial class CarListViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task AddCar()
+    async Task SaveCar()
     {
         if (string.IsNullOrEmpty(Make) || string.IsNullOrEmpty(Model) || string.IsNullOrEmpty(Vin))
         {
@@ -106,11 +108,20 @@ public partial class CarListViewModel : BaseViewModel
             Vin = Vin
         };
 
-        App.CarServiceInstance.AddCar(car);
-
-        await Shell.Current.DisplayAlert("Info", App.CarServiceInstance.StatusMessage, "Ok");
+        if (CarId != 0)
+        {
+            car.Id = CarId;
+            App.CarServiceInstance.UpdateCar(car);
+            await Shell.Current.DisplayAlert("Info", App.CarServiceInstance.StatusMessage, "Ok");
+        }
+        else
+        {
+            App.CarServiceInstance.AddCar(car);
+            await Shell.Current.DisplayAlert("Info", App.CarServiceInstance.StatusMessage, "Ok");
+        }
 
         await GetCarList();
+        await ClearForm();
     }
 
     [RelayCommand]
@@ -130,7 +141,7 @@ public partial class CarListViewModel : BaseViewModel
         }
         else
         {
-            await Shell.Current.DisplayAlert("Deletion Success", App.CarServiceInstance.StatusMessage, "Ok");
+            await Shell.Current.DisplayAlert("Info", "Deletion Success", "Ok");
             await GetCarList();
         }
     }
@@ -139,40 +150,39 @@ public partial class CarListViewModel : BaseViewModel
     async Task UpdateCar(int id)
     {
         // AddEditButtonText = editButtonText;
+
+        await Task.CompletedTask;
         return;
     }
 
-    //[RelayCommand]
-    //async Task SetEditMode(int id)
-    //{
-    //    AddEditButtonText = editButtonText;
-    //    CarId = id;
-    //    Car car;
-    //    if (accessType == NetworkAccess.Internet)
-    //    {
-    //        car = await carApiService.GetCar(CarId);
-    //    }
-    //    else
-    //    {
-    //        car = App.CarDatabaseService.GetCar(CarId);
-    //    }
+    [RelayCommand]
+    async Task SetEditMode(int id)
+    {
+        AddEditButtonText = editButtonText;
+        CarId = id;
+        Car car;
 
-    //    Make = car.Make;
-    //    Model = car.Model;
-    //    Vin = car.Vin;
-    //}
+        car = App.CarServiceInstance.GetCar(CarId);
 
-    //[RelayCommand]
-    //async Task ClearForm()
-    //{
-    //    AddEditButtonText = createButtonText;
-    //    CarId = 0;
-    //    Make = string.Empty;
-    //    Model = string.Empty;
-    //    Vin = string.Empty;
-    //}
+        Make = car.Make;
+        Model = car.Model;
+        Vin = car.Vin;
+    }
 
-    private async Task ShowAlert(string message)
+    [RelayCommand]
+    async Task ClearForm()
+    {
+        AddEditButtonText = createButtonText;
+        CarId = 0;
+
+        Make = string.Empty;
+        Model = string.Empty;
+        Vin = string.Empty;
+
+        await Task.CompletedTask;
+    }
+
+    private static async Task ShowAlert(string message)
     {
         await Shell.Current.DisplayAlert("Info", message, "Ok");
     }
